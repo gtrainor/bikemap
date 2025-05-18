@@ -87,44 +87,57 @@ em {
   padding: 6px 20px; /* vertical 6px, horizontal 20px */
 }
 
-/* Swatch with ::before */
-.legend-item::before {
+#map circle,
+.legend > div {
+  --color-departures: steelblue;
+  --color-arrivals: darkorange;
+  --color: color-mix(
+    in oklch,
+    var(--color-departures) calc(100% * var(--departure-ratio)),
+    var(--color-arrivals)
+  );
+}
+/* Shared color logic for map circles and legend swatches */
+#map circle,
+.legend > div {
+  --color-departures: steelblue;
+  --color-arrivals: darkorange;
+  --color: color-mix(
+    in oklch,
+    var(--color-departures) calc(100% * var(--departure-ratio)),
+    var(--color-arrivals)
+  );
+  fill: var(--color);
+}
+
+/* Legend container styling */
+.legend {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-block: 12px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #222;
+}
+
+/* Individual legend item styling */
+.legend > div {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  text-align: center;
+  position: relative;
+}
+
+/* Swatch block before each legend label */
+.legend > div::before {
   content: "";
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   border-radius: 4px;
   border: 1px solid #ccc;
-  background-color: var(--swatch-color);
+  background-color: var(--color);
   flex-shrink: 0;
-  display: inline-block;
-  /* Align swatch vertically centered */
-  margin-right: 8px;
 }
-
-/* Text align and padding adjustments */
-.legend-item.left {
-  justify-content: flex-start;
-  text-align: left;
-  color: #fff; /* Assume dark background */
-  padding-left: 12px;
-  padding-right: 8px;
-}
-
-.legend-item.center {
-  justify-content: center;
-  text-align: center;
-  color: #222; /* Assume light background */
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-.legend-item.right {
-  justify-content: flex-end;
-  text-align: right;
-  color: #fff; /* Assume dark background */
-  padding-left: 8px;
-  padding-right: 12px;
-}
-
-
-
