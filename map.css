@@ -1,0 +1,130 @@
+html,
+body {
+  margin: 0;
+  padding: 5;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+
+ #map {
+  width: 100%; 
+  height: 100%; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  border-radius: 8px; 
+} 
+
+
+#map svg {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+#map svg circle {
+  fill: steelblue;
+  fill-opacity: 0.6; /* 60% opacity */
+  stroke: white;
+  stroke-width: 1px;
+  pointer-events: auto;
+
+  --color-departures: steelblue;
+  --color-arrivals: darkorange;
+  --color: color-mix(
+    in oklch,
+    var(--color-departures) calc(100% * var(--departure-ratio)),
+    var(--color-arrivals)
+  );
+  background-color: var(--color); /* Only affects legend boxes */
+  fill: var(--color); /* Only affects circles */
+}
+header {
+  display: flex;
+  gap: 1em;
+  align-items: baseline;
+}
+
+label {
+  margin-left: auto;
+  user-select: none;
+}
+
+time, em {
+  display: block;
+}
+
+em {
+  color: #888;
+  font-style: italic;
+}
+
+
+.legend {
+  display: flex;
+  gap: 12px;  /* Gap between items */
+  align-items: center;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #222;
+}
+
+.legend-label {
+  font-weight: bold;
+  margin-right: 12px;
+  white-space: nowrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;  /* Gap between swatch and label text */
+  flex: 1;
+  position: relative;
+  padding: 6px 20px; /* vertical 6px, horizontal 20px */
+}
+
+/* Swatch with ::before */
+.legend-item::before {
+  content: "";
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: var(--swatch-color);
+  flex-shrink: 0;
+  display: inline-block;
+  /* Align swatch vertically centered */
+  margin-right: 8px;
+}
+
+/* Text align and padding adjustments */
+.legend-item.left {
+  justify-content: flex-start;
+  text-align: left;
+  color: #fff; /* Assume dark background */
+  padding-left: 12px;
+  padding-right: 8px;
+}
+
+.legend-item.center {
+  justify-content: center;
+  text-align: center;
+  color: #222; /* Assume light background */
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.legend-item.right {
+  justify-content: flex-end;
+  text-align: right;
+  color: #fff; /* Assume dark background */
+  padding-left: 8px;
+  padding-right: 12px;
+}
+
+
+
